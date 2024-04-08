@@ -12,7 +12,7 @@ const RightZone: React.FC<Props> = ({ cards, handleDragStart }) => {
       {cards.map((card) => (
         <span
           key={card.id}
-          className="flex-1 shadow-md min-w-[156px] h-[188px] flex flex-col justify-center items-center gap-2 bg-white"
+          className="flex-1 shadow-md min-w-[156px] h-[188px] flex flex-col justify-center items-center gap-2 bg-white cursor-pointer"
           draggable
           onDragStart={(e) => handleDragStart(e, card)}
         >
