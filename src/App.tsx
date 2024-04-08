@@ -7,7 +7,6 @@ const App: React.FC = () => {
   const [loadData, setLoadData] = useState<Card[]>([]);
   const [pathData, setPathData] = useState<Card[]>([]);
   const [check, setCheck] = useState(false);
-  console.log(sourceData);
 
   const handleDragStart = (e: React.DragEvent<HTMLSpanElement>, card: Card) => {
     e.dataTransfer.setData("cardId", card.id.toString());
@@ -19,7 +18,6 @@ const App: React.FC = () => {
   ) => {
     const cardId = e.dataTransfer.getData("cardId");
     const draggedCard = cards.find((card) => card.id === parseInt(cardId));
-    let updatedCards = cards;
 
     let targetArray: Card[] = [];
     switch (targetData) {
@@ -36,26 +34,24 @@ const App: React.FC = () => {
         break;
     }
 
-    if (targetArray.length < 3) {
+    if (targetArray.length < 3 && draggedCard) {
       switch (targetData) {
         case "Source":
-          setSourceData([...sourceData, draggedCard!]);
-          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          setSourceData([...sourceData, draggedCard]);
           break;
         case "Load":
-          setLoadData([...loadData, draggedCard!]);
-          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          setLoadData([...loadData, draggedCard]);
           break;
         case "Path":
-          setPathData([...pathData, draggedCard!]);
-          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          setPathData([...pathData, draggedCard]);
           break;
         default:
           break;
       }
-    }
 
-    setCards(updatedCards);
+      const updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+      setCards(updatedCards);
+    }
   };
 
   const handleCheck = () => {
@@ -66,12 +62,13 @@ const App: React.FC = () => {
     setSourceData([]);
     setLoadData([]);
     setPathData([]);
+    setCards(cardData)
     setCheck(false);
   };
 
   return (
     <>
-      <div className="flex gap-5 m-5 h-[685px] justify-between items-center">
+      <div className="flex gap-5 m-5 h-[685px] justify-between">
         {/* Left Zone */}
         <div className="flex-1 flex flex-col gap-5 p-5">
           {/* sourceData */}
@@ -166,7 +163,7 @@ const App: React.FC = () => {
           </div>
         </div>
         {/* Right Zone */}
-        <div className="flex-1 border shadow-md flex flex-wrap gap-5 p-5">
+        <div className="flex-1 border grid grid-cols-3 gap-5 p-5 transition-all duration-200">
           {cards.map((card) => (
             <span
               key={card.id}
@@ -181,8 +178,12 @@ const App: React.FC = () => {
         </div>
       </div>
       <div>
-        <button onClick={handleCheck}>Check</button>
-        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleCheck} className="btn">
+          Check
+        </button>
+        <button onClick={handleReset} className="btn">
+          Reset
+        </button>
       </div>
     </>
   );
