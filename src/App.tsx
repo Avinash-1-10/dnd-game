@@ -7,6 +7,7 @@ const App: React.FC = () => {
   const [loadData, setLoadData] = useState<Card[]>([]);
   const [pathData, setPathData] = useState<Card[]>([]);
   const [check, setCheck] = useState(false);
+  console.log(sourceData);
 
   const handleDragStart = (e: React.DragEvent<HTMLSpanElement>, card: Card) => {
     e.dataTransfer.setData("cardId", card.id.toString());
@@ -18,26 +19,40 @@ const App: React.FC = () => {
   ) => {
     const cardId = e.dataTransfer.getData("cardId");
     const draggedCard = cards.find((card) => card.id === parseInt(cardId));
-    const updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+    let updatedCards = cards;
 
+    let targetArray: Card[] = [];
     switch (targetData) {
       case "Source":
-        if (sourceData.length < 3) {
-          setSourceData([...sourceData, draggedCard!]);
-        }
+        targetArray = sourceData;
         break;
       case "Load":
-        if (loadData.length < 3) {
-          setLoadData([...loadData, draggedCard!]);
-        }
+        targetArray = loadData;
         break;
       case "Path":
-        if (pathData.length < 3) {
-          setPathData([...pathData, draggedCard!]);
-        }
+        targetArray = pathData;
         break;
       default:
         break;
+    }
+
+    if (targetArray.length < 3) {
+      switch (targetData) {
+        case "Source":
+          setSourceData([...sourceData, draggedCard!]);
+          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          break;
+        case "Load":
+          setLoadData([...loadData, draggedCard!]);
+          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          break;
+        case "Path":
+          setPathData([...pathData, draggedCard!]);
+          updatedCards = cards.filter((card) => card.id !== parseInt(cardId));
+          break;
+        default:
+          break;
+      }
     }
 
     setCards(updatedCards);
