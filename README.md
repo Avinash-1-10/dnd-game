@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# DND Game
+## [Live Link](https://dnd-game.vercel.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+This project is a React application for managing and organizing cards using drag and drop functionality. Users can drag cards from the right zone and drop them into different sections on the left zone. The left zone consists of three sections: Source, Load, and Path. Each section can hold up to three cards. The application also provides buttons to check the status of the cards and reset the board.
 
-Currently, two official plugins are available:
+## Features
+- Drag and drop cards between different sections.
+- Visual feedback on card placement.
+- Check button to verify card status.
+- Reset button to clear the board and start over.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Run `npm install` to install dependencies.
+4. Run `npm run dev` to start the development server.
+5. Open your web browser and go to `http://localhost:5173/` to view the application.
 
-## Expanding the ESLint configuration
+## Usage
+- Drag cards from the right zone and drop them into the desired section on the left zone.
+- Use the Check button to verify the status of the cards.
+- Use the Reset button to clear the board and start over.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies Used
+- React
+- TypeScript
+- HTML/CSS
+- Tailwind CSS
 
-- Configure the top-level `parserOptions` property like this:
+## Credits
+This project was created by [Avinash Yede](https://github.com/Avinash-1-10). Special thanks to [Rancholabs](https://www.rancholabs.com).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
